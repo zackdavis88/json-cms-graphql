@@ -1,0 +1,15 @@
+# the default app_name query is here so that we can formally declare the Query type and extend it in other files
+type Query {
+  """
+  query that returns the app name
+  """
+  app_name: String
+}
+
+# the default app_name mutation is here so that we can formally declare the Mutation type and extend it in other files
+type Mutation {
+  """
+  mutation that returns the app name
+  """
+  app_name: String
+}
