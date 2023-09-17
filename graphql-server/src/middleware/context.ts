@@ -1,10 +1,12 @@
 import { type IncomingMessage, type ServerResponse } from 'http';
+import { type BaseContext } from '@apollo/server';
 
-export interface TerraformerContext {
-  authToken?: string;
+export interface TerraformerContext extends BaseContext {
+  req: IncomingMessage;
+  res: ServerResponse<IncomingMessage>;
 }
 
-export const context = async ({
+export const createContext = async ({
   req,
   res,
 }: {
@@ -14,6 +16,5 @@ export const context = async ({
   return {
     req,
     res,
-    authToken: req.headers['x-auth-token'],
   };
 };

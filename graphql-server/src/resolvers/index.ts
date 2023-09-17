@@ -1,6 +1,6 @@
 import books from './book/index.js';
 
-export default {
+const resolvers = {
   Query: {
     app_name: () => 'terraformer_query',
     ...books.Query,
@@ -9,3 +9,5 @@ export default {
     app_name: () => 'terraformer_mutation',
   },
 };
+
+export default resolvers;
