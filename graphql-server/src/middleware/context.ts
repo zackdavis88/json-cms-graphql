@@ -1,9 +1,11 @@
 import { type IncomingMessage, type ServerResponse } from 'http';
 import { type BaseContext } from '@apollo/server';
+import ApiClient from '../api-client.js';
 
 export interface TerraformerContext extends BaseContext {
   req: IncomingMessage;
   res: ServerResponse<IncomingMessage>;
+  apiClient: ApiClient;
 }
 
 export const createContext = async ({
@@ -13,8 +15,10 @@ export const createContext = async ({
   req: IncomingMessage;
   res: ServerResponse;
 }) => {
+  const apiClient = new ApiClient(req);
   return {
     req,
     res,
+    apiClient,
   };
 };
