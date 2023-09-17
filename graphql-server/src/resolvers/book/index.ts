@@ -1,3 +1,5 @@
+import { type TerraformerContext } from 'src/middleware/context';
+
 const books = [
   {
     id: 1,
@@ -19,7 +21,12 @@ const getBooksResolver = () => {
   return books;
 };
 
-const getBookResolver = (_parent, args: { id: number }) => {
+const getBookResolver = (
+  _parent: unknown,
+  args: { id: number },
+  context: TerraformerContext,
+) => {
+  console.log(context.authToken);
   return books.find((book) => book.id === args.id);
 };
 
