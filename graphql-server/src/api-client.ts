@@ -3,7 +3,21 @@ import { TerraformerContext } from './middleware/context.js';
 
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
-interface ApiErrorResponse {
+export interface CreateUserRequest {
+  username: string;
+  password: string;
+}
+
+export interface CreateUserResponse {
+  message: string;
+  user: {
+    username: string;
+    displayName: string;
+    createdOn: string;
+  };
+}
+
+export interface ApiErrorResponse {
   error: string;
   errorType: string;
 }
@@ -17,20 +31,6 @@ export class ApiError extends Error {
     this.error = err.error;
     this.errorType = err.errorType;
   }
-}
-
-export interface CreateUserRequest {
-  username: string;
-  password: string;
-}
-
-export interface CreateUserResponse {
-  message: string;
-  user: {
-    username: string;
-    displayName: string;
-    createdOn: string;
-  };
 }
 
 abstract class ApiWrapper {

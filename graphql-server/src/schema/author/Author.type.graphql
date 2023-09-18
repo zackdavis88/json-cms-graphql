@@ -1,6 +1,0 @@
-type Author {
-  """
-  full name of an author.
-  """
-  name: String
-}

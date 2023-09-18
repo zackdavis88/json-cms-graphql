@@ -1,0 +1,34 @@
+"fields for creating a new user"
+input UserCreateRequest {
+  """
+  name of the user
+  """
+  username: String!
+
+  """
+  password of the user
+  """
+  password: String!
+}
+
+"fields returned when creating a user"
+type UserCreateResponse {
+  """
+  success text indicating a user was created
+  """
+  message: String
+
+  """
+  details of the user that was created
+  """
+  user: User
+
+  """
+  error details if there was a problem during creation
+  """
+  error: ApiError
+}
+
+extend type Mutation {
+  createUser(input: UserCreateRequest): UserCreateResponse
+}

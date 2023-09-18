@@ -1,0 +1,16 @@
+type User {
+  """
+  display name of the user
+  """
+  displayName: String!
+
+  """
+  username is a lower-cased version of display name
+  """
+  username: String!
+
+  """
+  timestamp when the user was created
+  """
+  createdOn: String!
+}

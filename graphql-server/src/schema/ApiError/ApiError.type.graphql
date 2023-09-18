@@ -1,0 +1,40 @@
+"all possible types of errors returned from the API"
+enum ErrorTypes {
+  """
+  an unexpected error occurred
+  """
+  FATAL
+
+  """
+  request input contains a validation error
+  """
+  VALIDATION
+
+  """
+  requested resource was not found
+  """
+  NOT_FOUND
+
+  """
+  request contains an authentication error
+  """
+  AUTHENTICATION
+
+  """
+  request contains an authorization error
+  """
+  AUTHORIZATION
+}
+
+"error details returned from the API"
+type ApiError {
+  """
+  text description of what went wrong
+  """
+  text: String
+
+  """
+  type of error that occurred
+  """
+  errorType: ErrorTypes
+}
