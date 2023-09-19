@@ -2,7 +2,7 @@ import { type IncomingMessage, type ServerResponse } from 'http';
 import { type BaseContext } from '@apollo/server';
 import ApiClient from '../api-client.js';
 
-export interface TerraformerContext extends BaseContext {
+export interface ApolloContext extends BaseContext {
   req: IncomingMessage;
   res: ServerResponse<IncomingMessage>;
   apiClient: ApiClient;

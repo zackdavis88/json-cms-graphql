@@ -1,5 +1,5 @@
 import { HOSTNAME, PORT, PROTOCOL } from './config/api.js';
-import { TerraformerContext } from './middleware/context.js';
+import { ApolloContext } from './middleware/context.js';
 
 type HttpMethods = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
 
@@ -52,10 +52,10 @@ abstract class ApiWrapper {
 }
 
 class ApiClient extends ApiWrapper {
-  protected req: TerraformerContext['req'];
+  protected req: ApolloContext['req'];
   protected url: string;
 
-  constructor(req: TerraformerContext['req']) {
+  constructor(req: ApolloContext['req']) {
     super();
     this.req = req;
     this.url = `${PROTOCOL}://${HOSTNAME}:${PORT}`; // This will not work outside of local development, which is probably as far as this project will ever go.

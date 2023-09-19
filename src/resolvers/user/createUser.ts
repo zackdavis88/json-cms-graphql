@@ -1,11 +1,11 @@
-import { TerraformerContext } from '../../middleware/context.js';
+import { ApolloContext } from '../../middleware/context.js';
 import { CreateUserRequest } from '../../api-client.js';
 import handleError from '../utils/handleError.js';
 
 const createUserMutation = async (
   _parent: unknown,
   { input }: { input: CreateUserRequest },
-  context: TerraformerContext,
+  context: ApolloContext,
 ) => {
   try {
     const { message, user } = await context.apiClient.createUser(input);
