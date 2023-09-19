@@ -30,5 +30,6 @@ type UserCreateResponse {
 }
 
 extend type Mutation {
+  "creates a new user"
   createUser(input: UserCreateRequest): UserCreateResponse
 }
