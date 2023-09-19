@@ -1,4 +1,4 @@
-import { ApiError } from '../../api-client.js';
+import { ApiError } from '../../api/types.js';
 
 const handleError = (errorResponse: unknown) => {
   if (errorResponse instanceof ApiError && errorResponse.errorType) {

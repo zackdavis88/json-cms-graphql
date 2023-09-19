@@ -1,5 +1,5 @@
 import { ApolloContext } from '../../middleware/context.js';
-import { CreateUserRequest } from '../../api-client.js';
+import { CreateUserRequest } from '../../api/types.js';
 import handleError from '../utils/handleError.js';
 
 const createUserMutation = async (
