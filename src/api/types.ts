@@ -8,6 +8,13 @@ export interface HttpOptions {
     [key: string]: string;
   };
 }
+
+interface User {
+  username: string;
+  displayName: string;
+  createdOn: string;
+}
+
 export interface CreateUserRequest {
   username: string;
   password: string;
@@ -15,21 +22,18 @@ export interface CreateUserRequest {
 
 export interface CreateUserResponse {
   message: string;
-  user: {
-    username: string;
-    displayName: string;
-    createdOn: string;
-  };
+  user: User;
 }
 
 export interface GenerateTokenResponse {
   message: string;
-  user: {
-    username: string;
-    displayName: string;
-    createdOn: string;
-  };
+  user: User;
   authToken: string;
+}
+
+export interface AuthenticateTokenResponse {
+  message: string;
+  user: User;
 }
 
 export interface ApiErrorResponse {
@@ -73,6 +77,21 @@ abstract class ApiWrapper {
       },
     };
     return this.call('GET', '/auth', options)
+      .then((response) => {
+        return Promise.resolve(response);
+      })
+      .catch((err) => {
+        return Promise.reject(err);
+      });
+  }
+
+  authenticateToken(authToken: string): Promise<AuthenticateTokenResponse> {
+    const options = {
+      headers: {
+        'x-auth-token': authToken,
+      },
+    };
+    return this.call('GET', '/auth/token', options)
       .then((response) => {
         return Promise.resolve(response);
       })
