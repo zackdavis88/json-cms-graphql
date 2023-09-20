@@ -1,0 +1,22 @@
+"fields returned when authenticating an auth token"
+type AuthenticateTokenResponse {
+  """
+  success text indicating a token is valid
+  """
+  message: String
+
+  """
+  details of the user that was authenticated
+  """
+  user: User
+
+  """
+  error details if there was a problem during authentication
+  """
+  error: ApiError
+}
+
+extend type Query {
+  "authenticate an auth token for a user"
+  authenticateToken: AuthenticateTokenResponse
+}

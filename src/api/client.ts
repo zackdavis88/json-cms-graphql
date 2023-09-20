@@ -1,6 +1,11 @@
 import { HOSTNAME, PORT, PROTOCOL } from '../config/api.js';
 import { ApolloContext } from '../middleware/context.js';
-import ApiWrapper, { HttpMethods, ApiError, ApiErrorResponse } from './types.js';
+import ApiWrapper, {
+  HttpMethods,
+  HttpOptions,
+  ApiError,
+  ApiErrorResponse,
+} from './types.js';
 import fetch from 'node-fetch';
 
 class ApiClient extends ApiWrapper {
@@ -13,7 +18,12 @@ class ApiClient extends ApiWrapper {
     this.url = `${PROTOCOL}://${HOSTNAME}:${PORT}`; // This will not work outside of local development, which is probably as far as this project will ever go.
   }
 
-  protected call(method: HttpMethods, path: string, body?: unknown) {
+  protected call(
+    method: HttpMethods,
+    path: string,
+    options?: HttpOptions,
+    body?: unknown,
+  ) {
     const fullUrl = `${this.url}${path}`;
 
     const authHeader = this.req.headers['x-auth-token'];
@@ -24,13 +34,15 @@ class ApiClient extends ApiWrapper {
       authToken = authHeader;
     }
 
-    const includeBody = method !== 'GET';
+    const includeBody = method !== 'GET' && body;
 
+    const authBasicHeader = options && options.headers && options.headers['x-auth-basic'];
     return fetch(fullUrl, {
       method,
       headers: {
-        'Content-Type': 'application/json',
-        'X-Auth-Token': authToken,
+        'content-type': 'application/json',
+        'x-auth-token': authToken,
+        'x-auth-basic': authBasicHeader || '',
       },
       body: includeBody ? JSON.stringify(body) : undefined,
     })
@@ -40,6 +52,14 @@ class ApiClient extends ApiWrapper {
           throw new ApiError(jsonResponse as ApiErrorResponse);
         }
 
+        const authToken = response.headers.get('x-auth-token');
+        if (authToken) {
+          return {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ...(jsonResponse as any),
+            authToken: authToken,
+          };
+        }
         return jsonResponse;
       })
       .catch((err) => {
