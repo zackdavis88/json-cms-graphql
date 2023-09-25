@@ -1,0 +1,40 @@
+"input fields for retrieving a list of users"
+input UserGetListRequest {
+  """
+  number of users per page
+  """
+  itemsPerPage: Int
+
+  """
+  user page that you want to retrieve
+  """
+  page: Int
+}
+
+"fields returned when retrieving a paginated list of users"
+type UserGetListResponse {
+  """
+  success text indicating a user list was retrieved
+  """
+  message: String
+
+  """
+  list of users that was retrieved
+  """
+  users: [User]
+
+  """
+  pagination data for the list of users
+  """
+  pagination: PaginationData
+
+  """
+  error details if there was a problem during retrieval
+  """
+  error: ApiError
+}
+
+extend type Query {
+  "retrieves a list of users"
+  getUserList(input: UserGetListRequest): UserGetListResponse
+}

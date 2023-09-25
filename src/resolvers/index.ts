@@ -5,6 +5,7 @@ const resolvers = {
   Query: {
     app_name: () => 'json_cms_query',
     ...authResolvers.Query,
+    ...userResolvers.Query,
   },
   Mutation: {
     app_name: () => 'json_cms_mutation',

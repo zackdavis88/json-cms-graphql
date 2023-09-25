@@ -10,12 +10,12 @@ import fetch from 'node-fetch';
 
 class ApiClient extends ApiWrapper {
   protected req: ApolloContext['req'];
-  protected url: string;
+  protected fqdn: string;
 
   constructor(req: ApolloContext['req']) {
     super();
     this.req = req;
-    this.url = `${PROTOCOL}://${HOSTNAME}:${PORT}`; // This will not work outside of local development, which is probably as far as this project will ever go.
+    this.fqdn = `${PROTOCOL}://${HOSTNAME}:${PORT}`; // This will not work outside of local development, which is probably as far as this project will ever go.
   }
 
   protected call(
@@ -24,7 +24,7 @@ class ApiClient extends ApiWrapper {
     options?: HttpOptions,
     body?: unknown,
   ) {
-    const fullUrl = `${this.url}${path}`;
+    const fqdnUrl = `${this.fqdn}${path}`;
 
     const authHeader = this.req.headers['x-auth-token'];
     let authToken = '';
@@ -37,6 +37,14 @@ class ApiClient extends ApiWrapper {
     const includeBody = method !== 'GET' && body;
 
     const authBasicHeader = options && options.headers && options.headers['x-auth-basic'];
+
+    const queryString = options && options.params ? options.params : {};
+
+    let fullUrl = fqdnUrl;
+    if (options && options.params) {
+      fullUrl = `${fqdnUrl}?${new URLSearchParams(queryString)}`;
+    }
+
     return fetch(fullUrl, {
       method,
       headers: {

@@ -1,0 +1,22 @@
+"pagination data returned from the API"
+type PaginationData {
+  """
+  current page for the request
+  """
+  page: Int!
+
+  """
+  items per page for the request
+  """
+  itemsPerPage: Int!
+
+  """
+  total number of items for the request
+  """
+  totalItems: Int!
+
+  """
+  total number of pages for the request
+  """
+  totalPages: Int!
+}
