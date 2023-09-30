@@ -1,5 +1,6 @@
 import { ApolloContext } from '../../middleware/context.js';
 import handleError from '../utils/handleError.js';
+import generateUserId from '../utils/generateUserId.js';
 
 const authenticateToken = async (
   _parent: never,
@@ -19,7 +20,10 @@ const authenticateToken = async (
 
     return {
       message,
-      user,
+      user: {
+        id: generateUserId(user.username),
+        ...user,
+      },
     };
   } catch (err) {
     return handleError(err);
