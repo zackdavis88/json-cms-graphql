@@ -4,15 +4,15 @@ import handleError from '../utils/handleError.js';
 
 const getUserListQuery = async (
   _parent: never,
-  { input }: { input: GetUserListRequest },
+  args: GetUserListRequest,
   context: ApolloContext,
 ) => {
   try {
     const { message, users, ...paginationData } =
-      await context.apiClient.getUserList(input);
+      await context.apiClient.getUserList(args);
     return {
       message,
-      users,
+      list: users,
       pagination: paginationData,
     };
   } catch (err) {

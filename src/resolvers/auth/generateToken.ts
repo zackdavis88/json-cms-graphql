@@ -16,7 +16,7 @@ const generateToken = async (_parent: never, _args: never, context: ApolloContex
 
     return {
       message,
-      authToken,
+      token: authToken,
       user,
     };
   } catch (err) {

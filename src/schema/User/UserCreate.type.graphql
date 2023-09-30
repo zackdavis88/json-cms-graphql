@@ -1,16 +1,3 @@
-"fields for creating a new user"
-input UserCreateRequest {
-  """
-  name of the user
-  """
-  username: String!
-
-  """
-  password of the user
-  """
-  password: String!
-}
-
 "fields returned when creating a user"
 type UserCreateResponse {
   """
@@ -31,5 +18,15 @@ type UserCreateResponse {
 
 extend type Mutation {
   "creates a new user"
-  createUser(input: UserCreateRequest): UserCreateResponse
+  createUser(
+    """
+    name of the user
+    """
+    username: String!
+
+    """
+    password of the user
+    """
+    password: String!
+  ): UserCreateResponse
 }

@@ -1,11 +1,3 @@
-"fields for retrieving an existing user"
-input UserGetRequest {
-  """
-  username or display name of the user to retrieve
-  """
-  username: String!
-}
-
 "fields returned when retrieving a user"
 type UserGetResponse {
   """
@@ -16,7 +8,7 @@ type UserGetResponse {
   """
   details of the user that was retrieved
   """
-  user: User
+  details: User
 
   """
   error details if there was a problem during retrieval
@@ -26,5 +18,10 @@ type UserGetResponse {
 
 extend type Query {
   "retrieves a user"
-  getUser(input: UserGetRequest): UserGetResponse
+  user(
+    """
+    username or display name of the user to retrieve
+    """
+    username: String!
+  ): UserGetResponse
 }

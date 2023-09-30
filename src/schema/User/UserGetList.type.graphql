@@ -1,16 +1,3 @@
-"input fields for retrieving a list of users"
-input UserGetListRequest {
-  """
-  number of users per page
-  """
-  itemsPerPage: Int
-
-  """
-  user page that you want to retrieve
-  """
-  page: Int
-}
-
 "fields returned when retrieving a paginated list of users"
 type UserGetListResponse {
   """
@@ -21,7 +8,7 @@ type UserGetListResponse {
   """
   list of users that was retrieved
   """
-  users: [User]
+  list: [User]
 
   """
   pagination data for the list of users
@@ -36,5 +23,15 @@ type UserGetListResponse {
 
 extend type Query {
   "retrieves a list of users"
-  getUserList(input: UserGetListRequest): UserGetListResponse
+  users(
+    """
+    number of users per page
+    """
+    itemsPerPage: Int
+
+    """
+    user page that you want to retrieve
+    """
+    page: Int
+  ): UserGetListResponse
 }

@@ -4,8 +4,8 @@ import getUserListQuery from './getUserList.js';
 
 export default {
   Query: {
-    getUser: getUserQuery,
-    getUserList: getUserListQuery,
+    user: getUserQuery,
+    users: getUserListQuery,
   },
   Mutation: {
     createUser: createUserMutation,

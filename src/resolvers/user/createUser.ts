@@ -4,11 +4,11 @@ import handleError from '../utils/handleError.js';
 
 const createUserMutation = async (
   _parent: never,
-  { input }: { input: CreateUserRequest },
+  args: CreateUserRequest,
   context: ApolloContext,
 ) => {
   try {
-    const { message, user } = await context.apiClient.createUser(input);
+    const { message, user } = await context.apiClient.createUser(args);
     return {
       message,
       user,

@@ -4,14 +4,14 @@ import handleError from '../utils/handleError.js';
 
 const getUserQuery = async (
   _parent: never,
-  { input }: { input: GetUserRequest },
+  args: GetUserRequest,
   context: ApolloContext,
 ) => {
   try {
-    const { message, user } = await context.apiClient.getUser(input);
+    const { message, user } = await context.apiClient.getUser(args);
     return {
       message,
-      user,
+      details: user,
     };
   } catch (err) {
     return handleError(err);

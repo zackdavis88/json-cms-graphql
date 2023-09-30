@@ -18,10 +18,10 @@ type GenerateTokenResponse {
   """
   the auth token that was generated
   """
-  authToken: String
+  token: String
 }
 
 extend type Query {
   "generate an auth token for a user"
-  generateToken: GenerateTokenResponse
+  authToken: GenerateTokenResponse
 }

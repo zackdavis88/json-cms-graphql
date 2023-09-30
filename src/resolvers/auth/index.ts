@@ -3,7 +3,7 @@ import authenticateTokenQuery from './authenticateToken.js';
 
 export default {
   Query: {
-    generateToken: generateTokenQuery,
+    authToken: generateTokenQuery,
     authenticateToken: authenticateTokenQuery,
   },
 };
