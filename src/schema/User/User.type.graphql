@@ -1,5 +1,12 @@
 type User {
   """
+  unique id for each user.
+
+  This is a base64 encoded username used for caching, not the same as the id in our database.
+  """
+  id: ID!
+
+  """
   display name of the user
   """
   displayName: String!

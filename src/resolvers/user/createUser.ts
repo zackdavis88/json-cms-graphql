@@ -1,6 +1,7 @@
 import { ApolloContext } from '../../middleware/context.js';
 import { CreateUserRequest } from '../../api/types.js';
 import handleError from '../utils/handleError.js';
+import generateUserId from '../utils/generateUserId.js';
 
 const createUserMutation = async (
   _parent: never,
@@ -11,7 +12,10 @@ const createUserMutation = async (
     const { message, user } = await context.apiClient.createUser(args);
     return {
       message,
-      user,
+      user: {
+        id: generateUserId(user.username),
+        ...user,
+      },
     };
   } catch (err) {
     return handleError(err);

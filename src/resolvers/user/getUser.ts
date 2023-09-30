@@ -1,6 +1,7 @@
 import { ApolloContext } from '../../middleware/context.js';
 import { GetUserRequest } from '../../api/types.js';
 import handleError from '../utils/handleError.js';
+import generateUserId from '../utils/generateUserId.js';
 
 const getUserQuery = async (
   _parent: never,
@@ -11,7 +12,10 @@ const getUserQuery = async (
     const { message, user } = await context.apiClient.getUser(args);
     return {
       message,
-      details: user,
+      details: {
+        id: generateUserId(user.username),
+        ...user,
+      },
     };
   } catch (err) {
     return handleError(err);
